@@ -1,0 +1,26 @@
+.AcardHotPrice{
+
+      width:20em;
+      height:3em;
+      border-radius: 20px;
+      color: white;
+      background-color: rgb(233, 64, 13);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+}
+
+.AcardHotPriceText{
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.AfireIcon{
+    background: -webkit-linear-gradient(rgb(250, 65, 65), rgb(255, 200, 19));
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+}
+.AcardHover:hover{
+    transform: scale(1.1);
+}

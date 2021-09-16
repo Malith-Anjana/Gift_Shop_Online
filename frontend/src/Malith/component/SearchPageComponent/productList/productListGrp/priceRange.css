@@ -1,0 +1,40 @@
+.ApriceRangeBox{
+    border: none;
+
+    border: solid 2px rgb(1, 84, 90) !important ;
+    margin-right: 10px;
+    max-height: 4vh;
+    margin-top: 7px;
+
+
+}
+.ApriceRangeBox:hover{
+    border-color:  rgb(10, 167, 184);
+    border: none;
+
+}
+
+
+.AviewIcon{
+    font-size: 27px;
+    color: rgb(87, 87, 87);
+    margin-left: 12px;
+    padding: 2px;
+    border:4px solid rgb(87, 87, 87);
+    border-radius: 20%;
+    
+}
+
+.AviewIcon:hover{
+    color: rgb(10, 167, 184);
+    border:4px solid  rgb(10, 167, 184);
+}
+
+.AviewGrp{
+    margin-left: 15rem;
+    align-content: center;
+    margin-bottom: 10px;
+}
+.AviewLabel{
+    margin-left: 35px;
+}

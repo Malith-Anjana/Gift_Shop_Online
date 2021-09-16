@@ -1,0 +1,22 @@
+.AcatCard {
+    font-size: 0.9rem;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 50;
+}
+
+.AlistItemAction:hover{
+    background-color: rgba(46, 154, 161, 0.308);
+
+}
+
+
+
+.AlistItem {
+    border: none !important;
+    padding: 0.3rem 0.4rem 0.3rem 0rem;
+}
+
+.AQuantityCat {
+    background-color: rgb(40, 161, 86);
+}
