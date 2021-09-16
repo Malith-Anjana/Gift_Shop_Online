@@ -13,7 +13,6 @@ export default function SearchPage() {
     const [pLower, setPlower] = useState("");
     const {search} = useLocation();
 
-
     useEffect(() => {
         document.body.style.backgroundColor = "#e8e8e8"
         const fetchProducts = async () =>{
@@ -22,9 +21,17 @@ export default function SearchPage() {
             const res = await axios.post("/abuyer/getallitems" + search);
             setProducts(res.data)
         }
-        fetchProducts();
 
-    }, [search])
+        if(pUpper && pLower){
+          handleChange();
+        }
+        else{
+          fetchProducts();
+        }
+        
+        
+
+    }, [search, pUpper,pLower])
 
     const productsProp=(data)=>{
       setProducts(data);
@@ -32,15 +39,24 @@ export default function SearchPage() {
     }
     
 
+    const clearAll=async () =>{
+      setPlower("");
+      setPupper("");
+    }
 
 
-    const handleChange=async (e)=>{
-        setPupper( e.Current.value);
-        console.log(pUpper)
-        const price = `${search}?pLower=3000&pUpper=5000`
+
+    const handleChange=async ()=>{
+       if(pUpper && pLower && search){
+        const price = `${search}&pLower=${pLower}&pUpper=${pUpper}`
         const res = await axios.post("/abuyer/getallitems" + price);
         setProducts(res.data)
-            
+       }
+      else{
+        const price = `?pLower=${pLower}&pUpper=${pUpper}`
+        const res = await axios.post("/abuyer/getallitems" + price);
+        setProducts(res.data)
+       }   
         
     }
 
@@ -78,25 +94,15 @@ export default function SearchPage() {
           <div className="d-flex justify-content-between align-items-center">
           <div className="d-inline-flex">
                     <p className="h-5 pt-2 mx-2">Price Range </p>
-                    <input type="number" placeholder="min" min="0" max="120000" name="pUpper" onChange={handleChange} value={pUpper} className="ApriceRangeBox"/><b className="mt-2">-</b>
-                    <input type="number" placeholder="max" min="0" max="120000" name= "pLower" onChange={handleChange} value={pLower} className="ApriceRangeBox" style={{marginLeft:"8px"}}/>
+                    <input type="number" placeholder="min" min="0" max="120000" name="pUpper" onChange={e=> setPlower(e.target.value)} value={pLower} className="ApriceRangeBox"/><b className="mt-2">-</b>
+                   <input type="number" placeholder="max" min="0" max="120000" name= "pLower" onChange={e=> setPupper(e.target.value)} value={pUpper} className="ApriceRangeBox" style={{marginLeft:"8px"}}/>
+                   
                 </div>
             
 
                 <div className="d-inline-flex">
-                    <div><p className="h-5 mx-2 mt-3">Sort By</p></div>
-                    <div class="btn-group p-2 dropleft">
-  <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Date
-  </button>
-  <div class="dropdown-menu">
-    <a class="dropdown-item" href="#">Action</a>
-    <a class="dropdown-item" href="#">Another action</a>
-    <a class="dropdown-item" href="#">Something else here</a>
-    <div class="dropdown-divider"></div>
-    <a class="dropdown-item" href="#">Separated link</a>
-  </div>
-</div></div>
+                <button  type="button" onClick={()=>clearAll()} class="btn btn-success">Clear All</button>
+                </div>
 </div>
 
                 </div>
