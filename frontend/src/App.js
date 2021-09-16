@@ -51,7 +51,7 @@ function App() {
           </Route>
 
           <Route exact component path="/abuyer/buyerreport">
-            <BuyerReport />
+            <BuyerReport/>
           </Route>
           {/* Malith */}
 

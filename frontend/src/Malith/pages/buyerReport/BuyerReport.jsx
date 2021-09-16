@@ -1,7 +1,23 @@
 import React from 'react'
 import './buyerReport.css'
 import imgLogo from './images/GifteryLogoGreen.png'
+import jsPDF from 'jspdf'
 export default function BuyerReport() {
+    const print = () =>{
+        let doc = new jsPDF("p", "pt","c3");
+        doc.html(document.querySelector("#AmyOrder"),{
+            callback:function(pdf){
+                let x;
+                for(x=0; x<8; x++){
+                let pageCount = doc.internal.getNumberOfPages();
+                pdf.deletePage(pageCount);
+            }
+                pdf.save("My_Order_Report.pdf")
+            }
+        })
+    }
+
+
     return (
         <div class="page-content container my-5" style={{fontFamily:"'Roboto', sans-serif"}}>
     <div class="page-header text-blue-d2 mt-4">
@@ -15,14 +31,11 @@ export default function BuyerReport() {
 
         <div class="page-tools">
             <div class="action-buttons">
-                <a class="mx-2 btn btn-success mx-1px text-95" href="#" data-title="Print">
+                <button class="mx-2 btn btn-success mx-1px text-95" href="#" data-title="Print" onClick={()=>print()}>
                     <i class="mx-2 fa fa-print text-light text-120 w-2"></i>
                     Print
-                </a>
-                <a class="btn btn-warning mx-1px text-95" href="#" data-title="PDF">
-                    <i class="mr-1 fa fa-file-pdf-o text-danger-m1 text-120 w-2"></i>
-                    Export
-                </a>
+                </button>
+               
 
                 <a class="mx-2 btn btn-danger mx-1px text-95" href="/abuyer/myorders/?cat=ordanalytic" data-title="Print">
                     <i class="mx-2 fa fa-left-arrow text-light text-120 w-2"></i>
@@ -31,10 +44,12 @@ export default function BuyerReport() {
             </div>
         </div>
     </div>
-
+       
     <div class="container px-0">
+    
         <div class="row mt-4">
-            <div class="col-12 col-lg-10 offset-lg-1">
+        <div id="AmyOrder">
+            <div class="col-12 col-lg-8 offset-lg-1">
                 <div class="row">
                     <div class="col-12">
                         <div class="text-center text-150">
@@ -47,7 +62,7 @@ export default function BuyerReport() {
      
 
                 <hr class="row brc-default-l1 mx-n1 mb-4" />
-
+                <br/> 
                 <div class="row">
                     <div class="col-sm-6">
                         <div>
@@ -79,11 +94,12 @@ export default function BuyerReport() {
                             <div class="my-1"><i class="fa fa-circle text-blue-m2 text-xs mr-1"></i> <span class="text-600 text-90">Duration:</span>August-October</div>
                         </div>
                     </div>
-    
+                    
                 </div>
+                <br/><br/>
                 <div className="text-center text-muted">
                     <u><h5 style={{fontFamily:"'Poppins', sans-serif"}} className="text-underlined">Monthly Report</h5></u>
-                </div>
+                </div><br/>
 
                 <table class="table my-3 text-center">
   <thead class="thead-light" style={{backgroundColor:"#d3ddf2"}}>
@@ -99,7 +115,7 @@ export default function BuyerReport() {
   </thead>
   <tbody style={{backgroundColor:"#f0f2f7"}}>
     <tr>
-      <th scope="row">ORD-35578347</th>
+      <th scope="row">611ff751769b6d438c8d67cc</th>
       <td>Sep 2, 2021</td>
       <td>Glamorous Blush flowers</td>
       <td>Gifty shop</td>
@@ -109,7 +125,7 @@ export default function BuyerReport() {
     </tr>
 
     <tr>
-      <th scope="row">ORD-53264647</th>
+      <th scope="row">611ff751769b6d438c8d67cc</th>
       <td>Sep 6, 2021</td>
       <td>Flora By Gucci Eau de Parfum 75ml</td>
       <td>ABC shop</td>
@@ -119,7 +135,7 @@ export default function BuyerReport() {
     </tr>
 
     <tr>
-      <th scope="row">ORD-4562347</th>
+      <th scope="row">611ff751769b6d438c8d67cc</th>
       <td>Sep 14, 2021</td>
       <td>Lindt Opera Cake</td>
       <td>XYZ shop</td>
@@ -129,7 +145,7 @@ export default function BuyerReport() {
     </tr>
 
     <tr>
-      <th scope="row">ORD-2364640</th>
+      <th scope="row">611ff751769b6d438c8d67cc</th>
       <td>Sep 21, 2021</td>
       <td>Apple Watch Series 3 Silver</td>
       <td>AMD shop</td>
@@ -144,13 +160,14 @@ export default function BuyerReport() {
 
                 
 
-                    <div class="row mt-3">
+                    <div class="row mt-4">
                         <div class="col-12 col-sm-7 text-grey-d2 text-95 mt-2 mt-lg-0">
                             Extra note such as company or payment information...
                         </div>
-
-                        <div class="col-12 col-sm-5 text-grey text-90 order-first order-sm-last">
+                        
+                        <div class="col-12 col-sm-5 mt-4 text-grey text-90 order-first order-sm-last">
                             <div class="row my-2">
+                            
                                 <div class="col-7 text-right">
                                     SubTotal
                                 </div>
@@ -173,7 +190,7 @@ export default function BuyerReport() {
                                     Total Amount
                                 </div>
                                 <div class="col-5">
-                                    <span class="text-150 text-success-d3 opacity-2">LKR 16,000</span>
+                                    <span class="text-120 text-success-d3 opacity-2">LKR 16,000</span>
                                 </div>
                             </div>
                         </div>
@@ -187,6 +204,7 @@ export default function BuyerReport() {
                 </div>
             </div>
         </div>
+    </div>
     </div>
 
     )

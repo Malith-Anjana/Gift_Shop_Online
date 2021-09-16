@@ -6,7 +6,6 @@ import {useState } from 'react'
 import axios from 'axios' 
 
 export default function Topbar(props) {
-  const [products, setProducts] = useState([]);
   const [searchKeyword, setSearchKeyword] = useState([]);
   const [status, setStaus] = useState(false);
   const [wishlistLength, setwishlistLength] = useState("");
@@ -27,33 +26,23 @@ useEffect(() => {
     
 }
 
-
-const filterData=(producs, searchKey)=>{
-
-    const result = producs.filter(
-      (product) =>
-       product.productName.toLowerCase().includes(searchKey)||
-       product.description.toLowerCase().includes(searchKey)||
-       product.brand.toLowerCase().includes(searchKey)
-    );
-   
-   setProducts(result);
-   if(result) 
-   {setStaus(true);}
-  }
-
-
-
   const handleSearchArea=(e)=>{
     e.preventDefault();
-    if(e){
-      <Redirect to="/abuyer/search"></Redirect>
-    }
-    axios.get("/abuyer/getallitems" + search).then((res)=>{
+    axios.post("/abuyer/getallitems" + search).then((res)=>{
         if (res.data) {
-            filterData(res.data, searchKeyword);
+            
+          const result = res.data.filter(
+            (product) =>
+             product.productName.toLowerCase().includes(searchKeyword)
+          );
+          
+         if(result) 
+         {setStaus(true);}
+
+         props.prodProp(result)
           }
-          props.prodProp(products)
+          
+          
 
     });
   }
@@ -72,7 +61,7 @@ const filterData=(producs, searchKey)=>{
           
           <div className="col-md-6 col-12 text-center">
           <form className="d-flex mt-3"style={{maxWidth:"600px"}} onSubmit={handleSearchArea}>
-        <input className="form-control" type="search" value={searchKeyword} onChange={handleChange}  placeholder="Search" aria-label="Search"/>
+        <input className="form-control" type="search" value={searchKeyword} onChange={handleChange}  placeholder="Search" aria-label="Search"/> 
         <button type="submit" className="btn btn-dark" type="submit">Search</button>
       </form>
           </div>

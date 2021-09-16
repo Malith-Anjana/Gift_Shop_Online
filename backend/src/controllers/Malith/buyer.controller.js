@@ -5,7 +5,6 @@ const getAllGiftItems = async(req,res)=>{
     const category = req.query.cat;
     const pUpper = req.query.pUpper;
     const pLower = req.query.pLower;
-    console.log(pUpper, pLower, category);
     try{
         let items;
         if(category && pUpper && pLower ){

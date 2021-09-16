@@ -6,6 +6,7 @@ import Topcard from '../../component/SearchPageComponent/pricAndSortCard/Topcard
 import {useLocation} from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import axios from 'axios' 
+import { FaWindows } from 'react-icons/fa'
 export default function SearchPage() {
     const [products, setProducts] = useState([]);
     const [status, setStaus] = useState(false);
@@ -33,7 +34,11 @@ export default function SearchPage() {
 
     }, [search, pUpper,pLower])
 
+
+
+
     const productsProp=(data)=>{
+      
       setProducts(data);
       setStaus(true);
     }
@@ -42,6 +47,7 @@ export default function SearchPage() {
     const clearAll=async () =>{
       setPlower("");
       setPupper("");
+      window.location.reload();
     }
 
 
